@@ -1,9 +1,12 @@
 package Com.Waluigi.SurvivalGame.Main;
 
 import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
+import Com.Waluigi.SurvivalGame.Main.Storage.BiomeList;
+import Com.Waluigi.SurvivalGame.Main.Storage.ItemList;
 import Com.Waluigi.SurvivalGame.Main.Tools.Tool;
 import Com.Waluigi.SurvivalGame.Main.Tools.ToolTypes;
 import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
+import Com.Waluigi.SurvivalGame.Main.World.Biome;
 import Com.Waluigi.SurvivalGame.Main.World.Chunk;
 import Com.Waluigi.SurvivalGame.Main.World.Spawnable;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
+    public static final String IMAGE_PATH = "Com/Waluigi/SurvivalGame/Resources/Images/";
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int GRID_SIZE = 50;
@@ -43,10 +47,6 @@ public class GamePanel extends JPanel implements ActionListener {
     public Tool PlayersTool = tools[0];
     Random random;
     Timer timer;
-    final Item Stone = new Item("Stone");
-    final Spawnable Rock = new Spawnable("Rock.png", Stone, true, ToolTypes.PICKAXE);
-    final Spawnable SharpRock = new Spawnable("SharpRock.png", new Item[]{Stone, Stone, Stone, new Item("Flint")}, true, ToolTypes.PICKAXE);
-    final Spawnable Tree = new Spawnable("Tree.png", new Item("Wood"), true, ToolTypes.AXE);
 
     public Chunk GetChunk(int X, int Y) {
         for (Chunk chunk : Map) {
@@ -70,8 +70,8 @@ public class GamePanel extends JPanel implements ActionListener {
             if (GetChunk(CurrentChunk.X - 1, CurrentChunk.Y) != null) {
                 CurrentChunk = GetChunk(CurrentChunk.X - 1, CurrentChunk.Y);
             } else {
-                CurrentChunk = new Chunk(12, 12, CurrentChunk.X - 1, CurrentChunk.Y);
-                CurrentChunk.GenerateChunk(RandomObjs(), 4, 3, 9);
+                CurrentChunk = new Chunk(CurrentChunk.X - 1, CurrentChunk.Y, RandomBiome());
+                CurrentChunk.GenerateChunk(4, 3, 9);
                 Map.add(CurrentChunk);
             }
         }
@@ -81,8 +81,8 @@ public class GamePanel extends JPanel implements ActionListener {
             if (GetChunk(CurrentChunk.X, CurrentChunk.Y - 1) != null) {
                 CurrentChunk = GetChunk(CurrentChunk.X, CurrentChunk.Y - 1);
             } else {
-                CurrentChunk = new Chunk(12, 12, CurrentChunk.X, CurrentChunk.Y - 1);
-                CurrentChunk.GenerateChunk(RandomObjs(), 4, 3, 9);
+                CurrentChunk = new Chunk(CurrentChunk.X, CurrentChunk.Y - 1, RandomBiome());
+                CurrentChunk.GenerateChunk(4, 3, 9);
                 Map.add(CurrentChunk);
             }
         }
@@ -92,8 +92,8 @@ public class GamePanel extends JPanel implements ActionListener {
             if (GetChunk(CurrentChunk.X + 1, CurrentChunk.Y) != null) {
                 CurrentChunk = GetChunk(CurrentChunk.X + 1, CurrentChunk.Y);
             } else {
-                CurrentChunk = new Chunk(12, 12, CurrentChunk.X + 1, CurrentChunk.Y);
-                CurrentChunk.GenerateChunk(RandomObjs(), 4, 3, 9);
+                CurrentChunk = new Chunk(CurrentChunk.X + 1, CurrentChunk.Y, RandomBiome());
+                CurrentChunk.GenerateChunk(4, 3, 9);
                 Map.add(CurrentChunk);
             }
         }
@@ -103,8 +103,8 @@ public class GamePanel extends JPanel implements ActionListener {
             if (GetChunk(CurrentChunk.X, CurrentChunk.Y + 1) != null) {
                 CurrentChunk = GetChunk(CurrentChunk.X, CurrentChunk.Y + 1);
             } else {
-                CurrentChunk = new Chunk(12, 12, CurrentChunk.X, CurrentChunk.Y + 1);
-                CurrentChunk.GenerateChunk(RandomObjs(), 4, 3, 9);
+                CurrentChunk = new Chunk(CurrentChunk.X, CurrentChunk.Y + 1, RandomBiome());
+                CurrentChunk.GenerateChunk(4, 3, 9);
                 Map.add(CurrentChunk);
             }
         }
@@ -120,29 +120,20 @@ public class GamePanel extends JPanel implements ActionListener {
         random = new Random();
         isRunning = true;
         PlayersTool = Pickaxe;
-        CurrentChunk = new Chunk(GRID_X, GRID_Y, random.nextInt(1, 5), random.nextInt(1, 5));
-        CurrentChunk.GenerateChunk(RandomObjs(), 4, 3, 9);
+        CurrentChunk = new Chunk(random.nextInt(1, 5), random.nextInt(1, 5), BiomeList.values()[random.nextInt(BiomeList.values().length)].biome);
+        CurrentChunk.GenerateChunk(4, 3, 9);
         Map.add(CurrentChunk);
         timer = new Timer(DELAY, this);
         timer.start();
     }
 
+    public Biome RandomBiome(){
+        return BiomeList.values()[random.nextInt(BiomeList.values().length)].biome;
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Draw(g);
-    }
-
-    public Spawnable[] RandomObjs() {
-        Random random = new Random();
-        int type = random.nextInt(5);
-        return switch (type) {
-            case 0 -> new Spawnable[]{Rock, SharpRock, Tree, Tree};
-            case 1 -> new Spawnable[]{Rock};
-            case 2 -> new Spawnable[]{Tree, Tree, Rock};
-            case 3 -> new Spawnable[]{Tree, Rock};
-            case 4 -> new Spawnable[]{Rock, SharpRock};
-            default -> null;
-        };
     }
 
     public void Draw(Graphics g) {

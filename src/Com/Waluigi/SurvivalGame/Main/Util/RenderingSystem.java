@@ -1,5 +1,7 @@
 package Com.Waluigi.SurvivalGame.Main.Util;
 
+import Com.Waluigi.SurvivalGame.Main.GamePanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -39,7 +41,7 @@ public class RenderingSystem {
             Image[] Images = new Image[ImageFiles.length];
             int a = 0;
             for(String File : ImageFiles){
-                Images[a] = getter.getImage("Com/Waluigi/SurvivalGame/Resources/Images/", File);
+                Images[a] = getter.getImage(GamePanel.IMAGE_PATH, File);
                 a++;
             }
             BufferedImage image = new BufferedImage(Images[0].getWidth(null), Images[0].getHeight(null), BufferedImage.TYPE_INT_ARGB);
