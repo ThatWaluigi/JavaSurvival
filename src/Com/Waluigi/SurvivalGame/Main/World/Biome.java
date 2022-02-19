@@ -4,8 +4,9 @@ import java.awt.*;
 
 public class Biome {
     Image Background;
-
-    public Biome(Image bg){
+    Spawnable[] BiomeObjects;
+    public Biome(Image bg, Spawnable[] Objects){
         this.Background = bg;
+        this.BiomeObjects = Objects;
     }
 }
