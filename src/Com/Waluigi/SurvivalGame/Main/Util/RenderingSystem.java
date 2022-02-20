@@ -68,7 +68,7 @@ public class RenderingSystem {
             if (url != null) {
                 return new ImageIcon(url).getImage();
             }else{
-                System.out.println("ERROR");
+                System.out.println("ERROR: (" + Path + Filename + ")");
                 return null;
             }
         }
