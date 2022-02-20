@@ -2,7 +2,6 @@ package Com.Waluigi.SurvivalGame.Main;
 
 import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
 import Com.Waluigi.SurvivalGame.Main.Storage.BiomeList;
-import Com.Waluigi.SurvivalGame.Main.Storage.ItemList;
 import Com.Waluigi.SurvivalGame.Main.Tools.Tool;
 import Com.Waluigi.SurvivalGame.Main.Tools.ToolTypes;
 import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
@@ -139,14 +138,15 @@ public class GamePanel extends JPanel implements ActionListener {
     public void Draw(Graphics g) {
         RenderingSystem.DrawSystem draw = new RenderingSystem.DrawSystem();
         RenderingSystem.ImageGetter getter = new RenderingSystem.ImageGetter();
-        g.setColor(Color.GREEN);
-
-        for(int x = 0; x < 12; ++x) {
-            g.drawLine(x * 50, 0, x * 50, 600);
-            g.drawLine(0, x * 50, 600, x * 50);
-        }
-
+        g.setColor(null);
         if (CurrentChunk != null) {
+            if (CurrentChunk.ChunkBiome.Background != null){
+                for (int i = 0; i < GRID_X; i++) {
+                    for (int j = 0; j < GRID_Y; j++) {
+                        draw.DrawImage(g,i*GRID_SIZE,j*GRID_SIZE, CurrentChunk.ChunkBiome.Background, GRID_SIZE);
+                    }
+                }
+            }
             for(int x = 0; x < CurrentChunk.ChunkObjects.length; ++x) {
                 for(int y = 0; y < CurrentChunk.ChunkObjects[x].length; ++y) {
                     Spawnable obj = CurrentChunk.ChunkObjects[x][y];
@@ -156,7 +156,11 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
             }
         }
-
+        g.setColor(Color.GREEN);
+        for(int x = 0; x < 12; ++x) {
+            g.drawLine(x * 50, 0, x * 50, 600);
+            g.drawLine(0, x * 50, 600, x * 50);
+        }
         draw.DrawCenteredImage(g, (int)PlayerX * 50 - 22, (int)PlayerY * 50 - 20, player.Filename, 60);
         g.setColor(null);
         PlayersTool.draw(g, (int)PlayerX * 50 - 5, (int)PlayerY * 50 - 20, 30);

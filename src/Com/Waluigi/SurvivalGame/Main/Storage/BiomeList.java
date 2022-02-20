@@ -1,17 +1,15 @@
 package Com.Waluigi.SurvivalGame.Main.Storage;
 
-import Com.Waluigi.SurvivalGame.Main.GamePanel;
-import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
-import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
 import Com.Waluigi.SurvivalGame.Main.World.Biome;
 import Com.Waluigi.SurvivalGame.Main.World.Spawnable;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public enum BiomeList {
     FOREST ("DirtGround.png",
             new SpawnableList[]{SpawnableList.ROCK, SpawnableList.TREE,SpawnableList.TREE}
+    ),
+
+    Quarry ("StoneGround.png",
+            new SpawnableList[]{SpawnableList.ROCK,SpawnableList.ROCK,SpawnableList.SHARP_ROCK,SpawnableList.ROCK}
     );
 
     public Biome biome;

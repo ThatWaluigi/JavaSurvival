@@ -6,7 +6,7 @@ import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
 import java.awt.*;
 
 public class Biome {
-    Image Background;
+    public Image Background;
     Spawnable[] BiomeObjects;
     public Biome(String bgFile, Spawnable[] Objects){
         RenderingSystem.ImageGetter getter = new RenderingSystem.ImageGetter();
