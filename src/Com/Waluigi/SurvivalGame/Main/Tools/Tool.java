@@ -12,12 +12,14 @@ public class Tool {
     public int MiningLevel;
     public ToolTypes ToolType;
     public int Durability;
+    public int CurrentDurability;
     public Image ToolImage;
 
     public Tool(int MLevel, int Durability, ToolTypes type, String[] ImageFiles) {
         RenderingSystem.DrawSystem draw = new RenderingSystem.DrawSystem();
         this.MiningLevel = MLevel;
         this.Durability = Durability;
+        this.CurrentDurability = Durability;
         this.ToolType = type;
         this.ToolImage = draw.StackImages(ImageFiles);
     }

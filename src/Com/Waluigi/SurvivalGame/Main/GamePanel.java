@@ -3,7 +3,6 @@ package Com.Waluigi.SurvivalGame.Main;
 import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
 import Com.Waluigi.SurvivalGame.Main.Storage.BiomeList;
 import Com.Waluigi.SurvivalGame.Main.Tools.Tool;
-import Com.Waluigi.SurvivalGame.Main.Tools.ToolTypes;
 import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
 import Com.Waluigi.SurvivalGame.Main.World.Biome;
 import Com.Waluigi.SurvivalGame.Main.World.Chunk;
@@ -17,6 +16,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
+
+import static Com.Waluigi.SurvivalGame.Main.Storage.ToolList.*;
 
 public class GamePanel extends JPanel implements ActionListener {
     public static final String IMAGE_PATH = "Com/Waluigi/SurvivalGame/Resources/Images/";
@@ -39,10 +40,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public Chunk CurrentChunk;
     ArrayList<Chunk> Map = new ArrayList<>();
     boolean isRunning = false;
-    Tool Shovel = new Tool(1, 120, ToolTypes.SHOVEL, new String[]{"ToolHandle.png", "ToolShovelHead.png"});
-    Tool Axe = new Tool(1, 75, ToolTypes.AXE, new String[]{"ToolHandle.png", "ToolAxeHead.png"});
-    Tool Pickaxe = new Tool(1, 95, ToolTypes.PICKAXE, new String[]{"ToolHandle.png", "ToolPickaxeHead.png"});
-    Tool[] tools = new Tool[]{Pickaxe, Axe, Shovel};
+    Tool[] tools = new Tool[]{PICKAXE.Tool, AXE.Tool, SHOVEL.Tool};
     public Tool PlayersTool = tools[0];
     Random random;
     Timer timer;
@@ -118,7 +116,7 @@ public class GamePanel extends JPanel implements ActionListener {
     public void StartGame() {
         random = new Random();
         isRunning = true;
-        PlayersTool = Pickaxe;
+        PlayersTool = PICKAXE.Tool;
         CurrentChunk = new Chunk(random.nextInt(1, 5), random.nextInt(1, 5), BiomeList.values()[random.nextInt(BiomeList.values().length)].biome);
         CurrentChunk.GenerateChunk(4, 3, 9);
         Map.add(CurrentChunk);
