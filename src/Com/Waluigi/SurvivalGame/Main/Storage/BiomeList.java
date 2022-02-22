@@ -5,7 +5,8 @@ import Com.Waluigi.SurvivalGame.Main.World.Spawnable;
 
 public enum BiomeList {
     FOREST ("DirtGround.png", new SpawnableList[]{SpawnableList.ROCK, SpawnableList.TREE,SpawnableList.TREE}),
-    Quarry ("StoneGround.png", new SpawnableList[]{SpawnableList.ROCK,SpawnableList.ROCK,SpawnableList.SHARP_ROCK,SpawnableList.ROCK});
+    QUARRY ("StoneGround.png", new SpawnableList[]{SpawnableList.ROCK,SpawnableList.ROCK,SpawnableList.SHARP_ROCK,SpawnableList.ROCK}),
+    MOUNTIAN ("StoneGround.png", new SpawnableList[]{SpawnableList.SHARP_ROCK, SpawnableList.SHARP_ROCK, SpawnableList.SHARP_ROCK, SpawnableList.ROCK, SpawnableList.ROCK});
 
     public final Biome biome;
     BiomeList(String BgImageFile, SpawnableList[] BiomeObjects) {
