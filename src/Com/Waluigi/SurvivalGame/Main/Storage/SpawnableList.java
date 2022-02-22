@@ -5,21 +5,11 @@ import Com.Waluigi.SurvivalGame.Main.Tools.ToolTypes;
 import Com.Waluigi.SurvivalGame.Main.World.Spawnable;
 
 public enum SpawnableList {
-    TREE ("Tree.png",
-            ItemList.WOOD,
-            true,
-            ToolTypes.AXE
-    ),
-    ROCK ("Rock.png",
-            ItemList.STONE,
-            true,
-            ToolTypes.PICKAXE
-    ),
-    SHARP_ROCK ("SharpRock.png",
-            new ItemList[]{ItemList.STONE,ItemList.STONE,ItemList.FLINT},
-            true,
-            ToolTypes.PICKAXE
-    );
+    TREE ("Tree.png", ItemList.WOOD, true, ToolTypes.AXE),
+    ROCK ("Rock.png", ItemList.STONE, true, ToolTypes.PICKAXE),
+    SHARP_ROCK ("SharpRock.png", new ItemList[]{ItemList.STONE,ItemList.STONE,ItemList.FLINT}, true, ToolTypes.PICKAXE);
+
+
 
     public final Spawnable Spawnable;
     SpawnableList(String ImageFile, ItemList Drop, boolean Collidable, ToolTypes NeededTool) {
