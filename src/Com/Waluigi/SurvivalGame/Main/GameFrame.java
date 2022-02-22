@@ -1,7 +1,6 @@
 package Com.Waluigi.SurvivalGame.Main;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GameFrame extends JFrame {
     GameFrame() {
