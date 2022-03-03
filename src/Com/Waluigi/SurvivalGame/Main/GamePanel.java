@@ -162,16 +162,16 @@ public class GamePanel extends JPanel implements ActionListener {
         draw.DrawCenteredImage(g, (int)PlayerX * 50 - 22, (int)PlayerY * 50 - 20, player.Filename, 60);
         g.setColor(null);
         PlayersTool.draw(g, (int)PlayerX * 50 - 5, (int)PlayerY * 50 - 20, 30);
-        g.setColor(new Color(133, 68, 25, 255));
+        g.setColor(new Color(133, 68, 25, 180));
         if (InventoryOpen) {
             int invX = 0;
             int invY = 400;
             g.fillRect(invX, invY, 125, 200);
-            g.setColor(new Color(155, 82, 31, 255));
+            g.setColor(new Color(155, 82, 31, 180));
             g.fillRect(invX + 5, invY + 5, 115, 190);
             Font InvFont = new Font("Comic Sans MS", Font.BOLD, 12);
             g.setFont(InvFont);
-            g.setColor(Color.WHITE);
+            g.setColor(new Color(255, 255, 255, 200));
             draw.DrawCenteredImage(g, invX, invY - 85, getter.getImage("Com/Waluigi/SurvivalGame/Resources/Images/", "Compass.png"), 80);
             String Location = CurrentChunk.X + "," + CurrentChunk.Y;
             int pos = g.getFontMetrics(InvFont).stringWidth(Location);
@@ -180,7 +180,8 @@ public class GamePanel extends JPanel implements ActionListener {
 
             for(int i1 = 0 ; i1<Inventory.size(); i1++) {
                 Item i = Inventory.get(i1);
-                g.drawString(i.Name + ": " + i.Amount, invX + 15, invY + 20 + 12 * i1);
+                g.drawString(i.Name + ": " + i.Amount, invX + 25, invY + 20 + 12 * i1);
+                draw.DrawImage(g, invX + 10, invY + 7 + 12 * i1, i.Icon, 15);
             }
 
             g.setFont(null);
