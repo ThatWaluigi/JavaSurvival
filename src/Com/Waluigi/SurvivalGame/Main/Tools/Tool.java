@@ -2,7 +2,7 @@ package Com.Waluigi.SurvivalGame.Main.Tools;
 
 import Com.Waluigi.SurvivalGame.Main.GamePanel;
 import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
-import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
+import Com.Waluigi.SurvivalGame.Main.Util.RenderSys;
 import Com.Waluigi.SurvivalGame.Main.World.Spawnable;
 
 import java.awt.*;
@@ -16,12 +16,12 @@ public class Tool {
     public Image ToolImage;
 
     public Tool(int MLevel, int Durability, ToolTypes type, String[] ImageFiles) {
-        RenderingSystem.DrawSystem draw = new RenderingSystem.DrawSystem();
+        RenderSys sys = new RenderSys();
         this.MiningLevel = MLevel;
         this.Durability = Durability;
         this.CurrentDurability = Durability;
         this.ToolType = type;
-        this.ToolImage = draw.StackImages(ImageFiles);
+        this.ToolImage = sys.StackImages(GamePanel.IMAGE_PATH, ImageFiles);
     }
 
     public void UseTool(GamePanel gamePanel, int X, int Y) {
@@ -46,7 +46,7 @@ public class Tool {
     }
 
     public void draw(Graphics g, int x, int y, int Scale) {
-        RenderingSystem.DrawSystem draw = new RenderingSystem.DrawSystem();
-        draw.DrawCenteredImage(g, x, y, this.ToolImage, Scale);
+        RenderSys sys = new RenderSys();
+        sys.DrawCenteredImage(g, x, y, this.ToolImage, Scale);
     }
 }

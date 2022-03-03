@@ -2,7 +2,7 @@ package Com.Waluigi.SurvivalGame.Main.Storage;
 
 import Com.Waluigi.SurvivalGame.Main.GamePanel;
 import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
-import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
+import Com.Waluigi.SurvivalGame.Main.Util.RenderSys;
 
 public enum ItemList {
     STONE ("Stone", "Rock.png"),
@@ -11,7 +11,7 @@ public enum ItemList {
 
     public final Item item;
     ItemList(String ItemName, String Image) {
-        RenderingSystem.ImageGetter getter = new RenderingSystem.ImageGetter();
-        this.item = new Item(ItemName, getter.getImage(GamePanel.IMAGE_PATH, Image));
+        RenderSys sys = new RenderSys();
+        this.item = new Item(ItemName, sys.getImage(GamePanel.IMAGE_PATH, Image));
     }
 }

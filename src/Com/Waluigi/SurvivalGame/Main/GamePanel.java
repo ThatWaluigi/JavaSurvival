@@ -3,7 +3,7 @@ package Com.Waluigi.SurvivalGame.Main;
 import Com.Waluigi.SurvivalGame.Main.Inventory.Item;
 import Com.Waluigi.SurvivalGame.Main.Storage.BiomeList;
 import Com.Waluigi.SurvivalGame.Main.Tools.Tool;
-import Com.Waluigi.SurvivalGame.Main.Util.RenderingSystem;
+import Com.Waluigi.SurvivalGame.Main.Util.RenderSys;
 import Com.Waluigi.SurvivalGame.Main.World.Biome;
 import Com.Waluigi.SurvivalGame.Main.World.Chunk;
 import Com.Waluigi.SurvivalGame.Main.World.Spawnable;
@@ -134,14 +134,13 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void Draw(Graphics g) {
-        RenderingSystem.DrawSystem draw = new RenderingSystem.DrawSystem();
-        RenderingSystem.ImageGetter getter = new RenderingSystem.ImageGetter();
+        RenderSys sys = new RenderSys();
         g.setColor(null);
         if (CurrentChunk != null) {
             if (CurrentChunk.ChunkBiome.Background != null){
                 for (int i = 0; i < GRID_X; i++) {
                     for (int j = 0; j < GRID_Y; j++) {
-                        draw.DrawImage(g,i*GRID_SIZE,j*GRID_SIZE, CurrentChunk.ChunkBiome.Background, GRID_SIZE);
+                        sys.DrawImage(g,i*GRID_SIZE,j*GRID_SIZE, CurrentChunk.ChunkBiome.Background, GRID_SIZE);
                     }
                 }
             }
@@ -149,7 +148,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 for(int y = 0; y < CurrentChunk.ChunkObjects[x].length; ++y) {
                     Spawnable obj = CurrentChunk.ChunkObjects[x][y];
                     if (obj != null) {
-                        draw.DrawCenteredImage(g, x * 50 - 22, y * 50 - 22, obj.ImageFile, 60);
+                        sys.DrawCenteredImage(g, x * 50 - 22, y * 50 - 22, obj.ImageFile, 60);
                     }
                 }
             }
@@ -159,7 +158,7 @@ public class GamePanel extends JPanel implements ActionListener {
             g.drawLine(x * 50, 0, x * 50, 600);
             g.drawLine(0, x * 50, 600, x * 50);
         }
-        draw.DrawCenteredImage(g, (int)PlayerX * 50 - 22, (int)PlayerY * 50 - 20, player.Filename, 60);
+        sys.DrawCenteredImage(g, (int)PlayerX * 50 - 22, (int)PlayerY * 50 - 20, player.Filename, 60);
         g.setColor(null);
         PlayersTool.draw(g, (int)PlayerX * 50 - 5, (int)PlayerY * 50 - 20, 30);
         g.setColor(new Color(133, 68, 25, 180));
@@ -172,7 +171,7 @@ public class GamePanel extends JPanel implements ActionListener {
             Font InvFont = new Font("Comic Sans MS", Font.BOLD, 12);
             g.setFont(InvFont);
             g.setColor(new Color(255, 255, 255, 200));
-            draw.DrawCenteredImage(g, invX, invY - 85, getter.getImage("Com/Waluigi/SurvivalGame/Resources/Images/", "Compass.png"), 80);
+            sys.DrawCenteredImage(g, invX, invY - 85, sys.getImage("Com/Waluigi/SurvivalGame/Resources/Images/", "Compass.png"), 80);
             String Location = CurrentChunk.X + "," + CurrentChunk.Y;
             int pos = g.getFontMetrics(InvFont).stringWidth(Location);
             g.drawString(Location, (110 - pos) / 2, invY - 30);
@@ -181,7 +180,7 @@ public class GamePanel extends JPanel implements ActionListener {
             for(int i1 = 0 ; i1<Inventory.size(); i1++) {
                 Item i = Inventory.get(i1);
                 g.drawString(i.Name + ": " + i.Amount, invX + 25, invY + 20 + 12 * i1);
-                draw.DrawImage(g, invX + 10, invY + 7 + 12 * i1, i.Icon, 15);
+                sys.DrawImage(g, invX + 10, invY + 7 + 12 * i1, i.Icon, 15);
             }
 
             g.setFont(null);
