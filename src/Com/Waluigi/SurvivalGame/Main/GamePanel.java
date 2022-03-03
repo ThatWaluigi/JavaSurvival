@@ -55,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     GamePanel() {
-        setPreferredSize(new Dimension(600, 600));
+        setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setBackground(Color.black);
         setFocusable(true);
         addKeyListener(new GamePanel.GameKeyListener());
