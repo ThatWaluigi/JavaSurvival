@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements ActionListener {
     Tool[] tools = new Tool[]{PICKAXE.Tool, AXE.Tool, SHOVEL.Tool};
     public Tool PlayersTool = tools[0];
     Random random;
+    RenderSys sys;
     Timer timer;
 
     public Chunk GetChunk(int X, int Y) {
@@ -115,6 +116,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void StartGame() {
         random = new Random();
+        sys = new RenderSys();
         isRunning = true;
         PlayersTool = PICKAXE.Tool;
         CurrentChunk = new Chunk(random.nextInt(1, 5), random.nextInt(1, 5), BiomeList.values()[random.nextInt(BiomeList.values().length)].biome);
@@ -134,7 +136,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void Draw(Graphics g) {
-        RenderSys sys = new RenderSys();
         g.setColor(null);
         if (CurrentChunk != null) {
             if (CurrentChunk.ChunkBiome.Background != null){
