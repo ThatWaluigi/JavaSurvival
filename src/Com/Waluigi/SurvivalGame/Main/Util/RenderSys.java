@@ -50,10 +50,10 @@ public class RenderSys {
      * @param ImageFiles A list of images to stack (note: First image defines size of the image)
      * @return Returns the stacked image
      */
-    public Image StackImages(String Path, String[] ImageFiles){
+    public Image StackImages(String Path, String[] ImageFiles) {
         Image[] Images = new Image[ImageFiles.length];
         int a = 0;
-        for(String File : ImageFiles){
+        for (String File : ImageFiles) {
             Images[a] = getImage(Path, File);
             a++;
         }
@@ -63,28 +63,5 @@ public class RenderSys {
             g.drawImage(value, 0, 0, null);
         }
         return image;
-    }
-    public static class TileMap{
-        public Layer[] Layers;
-        public int GridSize;
-        public Dimension ScreenSize;
-        public TileMap(int LayerAmount, int GridSize, Dimension ScreenSize){
-            this.GridSize = GridSize;
-            this.ScreenSize = ScreenSize;
-            this.Layers = new Layer[LayerAmount];
-        }
-        public void VisulizeGrid(Graphics g, Color color){
-            for(int x = 0; x < ScreenSize.width/GridSize; ++x) {
-                g.setColor(color);
-                g.drawLine(x * GridSize, 0, x * GridSize, ScreenSize.height);
-                g.drawLine(0, x * GridSize, ScreenSize.width, x * GridSize);
-            }
-        }
-        public class Layer{
-            public Image[][] Tiles;
-            Layer(){
-                Tiles = new Image[ScreenSize.width/GridSize][ScreenSize.height /GridSize];
-            }
-        }
     }
 }
